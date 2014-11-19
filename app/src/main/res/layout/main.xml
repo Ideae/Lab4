@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- XML FILE USED FOR CREATING THE USER INTERFACE -->
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start"
+            android:id="@+id/start" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="End"
+            android:id="@+id/end"
+            android:layout_gravity="right" />
+        <EditText
+            android:layout_width="237dp"
+            android:layout_height="86dp"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/messageText"
+            android:layout_gravity="left|bottom"
+            android:background="#ffffffff" />
+
+        <Button
+            android:layout_width="141dp"
+            android:layout_height="82dp"
+            android:text="Send"
+            android:id="@+id/sendButton"
+            android:layout_gravity="right|bottom"
+            android:clickable="true"
+            android:onClick="OnClickSend" />
+
+        <EditText
+            android:layout_width="246dp"
+            android:layout_height="75dp"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/portNumber"
+            android:layout_gravity="left|center_vertical"
+            android:background="#ff5a5a5a" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chance TIme"
+        android:id="@+id/toop"
+        android:layout_gravity="center_horizontal|top" />
+</FrameLayout>
