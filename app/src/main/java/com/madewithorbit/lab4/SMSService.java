@@ -23,13 +23,12 @@ public class SMSService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        //mHandler = new Handler();
-        //mHandler.postDelayed(r, 100);
         isStarted = true;
         IntentFilter i = new IntentFilter();
         i.setPriority(Integer.MAX_VALUE);
         i.addAction("android.provider.Telephony.SMS_RECEIVED");
         i.addAction("com.madewithorbit.lab4.smsservice.STOP");
+        i.addAction("com.madewithorbit.lab4.smsservice.PHONEHOME");
         registerReceiver(smsReceiver, i);
         Log.d("zack","reg");
     }
@@ -80,6 +79,10 @@ public class SMSService extends Service {
                 } catch (Exception e) {
                     Log.e("SmsReceiver", "Exception smsReceiver" +e);
                 }
+            }
+            else if (intent.getAction().equals("com.madewithorbit.lab4.smsservice.PHONEHOME"))
+            {
+                Toast.makeText(context,"phone home",Toast.LENGTH_LONG).show();
             }
         }
     }
