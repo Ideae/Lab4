@@ -2,18 +2,11 @@ package com.madewithorbit.lab4;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
-import android.provider.Telephony;
 import android.telephony.SmsManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import java.security.Provider;
-
-/* Controller class to the user interface found under /res/layout/main */
 public class Lab4 extends Activity implements View.OnClickListener {
     /** Called when the activity is first created. */
     EditText random;
@@ -28,10 +21,7 @@ public class Lab4 extends Activity implements View.OnClickListener {
         findViewById(R.id.toop).setOnClickListener(this);
         findViewById(R.id.midnight).setOnClickListener(this);
         findViewById(R.id.tester).setOnClickListener(this);
-        findViewById(R.id.randomDisplay);
         random = (EditText)findViewById(R.id.randomDisplay);
-
-
     }
     public void onClick(View v) {
             v.getId();
@@ -57,7 +47,6 @@ public class Lab4 extends Activity implements View.OnClickListener {
     {
         String portNumber = ((EditText)findViewById(R.id.portNumber)).getText().toString();
         String message = ((EditText)findViewById(R.id.messageText)).getText().toString();
-        //Log.d("zack", portNumber + ":" + message);
         SmsManager smsManager = SmsManager.getDefault();
         smsManager.sendTextMessage(portNumber, null, message, null, null);
     }

@@ -2,8 +2,7 @@
 <!-- XML FILE USED FOR CREATING THE USER INTERFACE -->
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-    android:id="@+id/">
+        android:layout_height="fill_parent">
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -95,6 +94,5 @@
         android:layout_toEndOf="@+id/start"
         android:layout_marginTop="43dp"
         android:layout_alignRight="@+id/toop"
-        android:layout_alignEnd="@+id/toop"
-        android:background="#ff5a8dff" />
+        android:layout_alignEnd="@+id/toop" />
 </RelativeLayout>
