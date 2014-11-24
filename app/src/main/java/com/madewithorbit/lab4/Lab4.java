@@ -1,22 +1,17 @@
 package com.madewithorbit.lab4;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -29,10 +24,9 @@ import static android.view.ViewGroup.LayoutParams;
 
 public class Lab4 extends Activity {
 
+    ComponentName component;
     private boolean debugging = true;
-
     private HashMap<Integer, GradientDrawable> stageColor = new HashMap<>();
-
     private View.OnClickListener divider = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -94,8 +88,6 @@ public class Lab4 extends Activity {
             b2.setOnClickListener(this);
         }
     };
-
-    ComponentName component;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
