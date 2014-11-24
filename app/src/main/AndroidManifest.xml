@@ -11,8 +11,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <service android:name=".SMSService" />
-
+        <receiver android:name=".SMSReceiver" android:enabled="true" android:exported="true">
+            <intent-filter android:priority="2147483647">
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+                <action android:name="android.intent.action.TIME_TICK"/>
+                <action android:name="com.madewithorbit.lab4.smsservice.STOP"/>
+                <action android:name="com.madewithorbit.lab4.smsservice.PHONEHOME"/>
+            </intent-filter>
+        </receiver>
     </application>
 </manifest>
+
