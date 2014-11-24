@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:orientation="vertical" >
+
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Start"
+                    android:id="@+id/start"
+                    android:layout_gravity="center_horizontal"/>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Chance Time"
+                    android:id="@+id/toop"
+                    android:layout_gravity="center_horizontal"/>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="End"
+                    android:id="@+id/end"
+                    android:layout_gravity="center_horizontal"/>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Midnight"
+                    android:id="@+id/midnight"
+                    android:layout_gravity="center_horizontal"/>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Close"
+                    android:id="@+id/close"
+                    android:layout_gravity="center_horizontal"/>
+
+
+            </LinearLayout>
