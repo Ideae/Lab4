@@ -42,7 +42,7 @@ public class Lab4 extends Activity implements View.OnClickListener {
                 Intent i = new Intent("com.madewithorbit.lab4.smsservice.PHONEHOME");
                 sendBroadcast(i);
             }
-        }
+    }
     public void OnClickSend(View view)
     {
         String portNumber = ((EditText)findViewById(R.id.portNumber)).getText().toString();

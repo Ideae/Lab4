@@ -42,6 +42,7 @@ public class SMSService extends Service {
         boolean toastOnReceive = false, sendAtTime = true;
         int hour = 22;
         int minute = 39;
+        String lastNumber = "";
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals("com.madewithorbit.lab4.smsservice.STOP"))
@@ -61,7 +62,7 @@ public class SMSService extends Service {
 
                             SmsMessage currentMessage = SmsMessage.createFromPdu((byte[]) pdusObj[i]);
                             String phoneNumber = currentMessage.getDisplayOriginatingAddress();
-
+                            lastNumber = phoneNumber;
                             String senderNum = phoneNumber;
                             String message = currentMessage.getDisplayMessageBody();
 
@@ -127,11 +128,33 @@ public class SMSService extends Service {
             file.delete();
             file.createNewFile();
 
+            ArrayList<String> msgs = new ArrayList<String>();
+            while(true)
+            {
+                if (result.length() > 120)
+                {
+                    msgs.add(result.substring(0, 120));
+                    result = result.substring(120, result.length());
+                }
+                else
+                {
+                    msgs.add(result);
+                    break;
+                }
+            }
+
             SmsManager smsManager = SmsManager.getDefault();
-            //result = "ugu.";
-            smsManager.sendTextMessage(midnightAddress, null, result, null, null);
+            for(String m : msgs) {
+                if (!lastNumber.isEmpty())
+                {
+                    smsManager.sendTextMessage(lastNumber, null, m, null, null);
+                }
+                else {
+                    smsManager.sendTextMessage(midnightAddress, null, m, null, null);
+                }
+            }
 
-
+            //todo: test this function
         }
 
         public void WriteToFile(String sender, String message) throws IOException
@@ -142,7 +165,7 @@ public class SMSService extends Service {
             {
                 file.createNewFile();
             }
-            String text = "Sender:\n"+sender+"\nMessage:\n"+message+"\n";
+            String text = "Sender: "+sender+"\nMessage: "+message+"\n";
 
             FileOutputStream fOut = new FileOutputStream(file, true);
             OutputStreamWriter osw = new OutputStreamWriter(fOut);
